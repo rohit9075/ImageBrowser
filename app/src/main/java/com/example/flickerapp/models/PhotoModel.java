@@ -17,13 +17,6 @@ public class PhotoModel {
     private String tags;
 
 
-    public PhotoModel(String image, String title, String author, String tags) {
-        this.image = image;
-        this.title = title;
-        this.author = author;
-        this.tags = tags;
-    }
-
     public String getImage(){
         return image;
     }

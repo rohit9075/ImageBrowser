@@ -3,11 +3,13 @@ package com.example.flickerapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.flickerapp.R;
 import com.example.flickerapp.adapter.ImageRecyclerAdapter;
@@ -15,14 +17,14 @@ import com.example.flickerapp.api_client.APIClient;
 import com.example.flickerapp.api_client.ImagelistEndPoint;
 import com.example.flickerapp.models.PhotoModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -33,7 +35,6 @@ public class ImageListFragment extends Fragment {
 
     // reference variables
     RecyclerView mRecyclerView;
-
 
     List<PhotoModel> mFlickerDataList;
 
@@ -56,24 +57,20 @@ public class ImageListFragment extends Fragment {
 
 
         mRecyclerView = view.findViewById(R.id.recyclerView);
-
-        mFlickerDataList = new ArrayList<>();
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ImagelistEndPoint apiService =
                 APIClient.getClient().create(ImagelistEndPoint.class);
 
-        Call<List<PhotoModel>> call = apiService.getRepo("flower","any","json","1");
-        call.enqueue(new Callback<List<PhotoModel>>() {
+        Call<PhotoModel> call = apiService.getRepo("car","any","json","1");
+        call.enqueue(new Callback<PhotoModel>() {
             @Override
-            public void onResponse(Call<List<PhotoModel>> call, Response<List<PhotoModel>> response) {
-
-                mFlickerDataList.clear();
-
-                Log.d("Fragment", "onResponse: " + response.toString());
+            public void onResponse(Call<PhotoModel> call, Response<PhotoModel> response) {
 
                 //adding the all data to the ArrayList
+                mFlickerDataList = new ArrayList<>();
                 mFlickerDataList.addAll(response.body());
+                Toast.makeText(getContext(), mFlickerDataList.size(), Toast.LENGTH_SHORT).show();
 
                 mImageRecyclerAdapter = new ImageRecyclerAdapter(getContext(), mFlickerDataList);
 
@@ -81,9 +78,10 @@ public class ImageListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<PhotoModel>> call, Throwable t) {
+            public void onFailure(Call<PhotoModel> call, Throwable t) {
                 // Log error here since request failed
                 Log.e("Repos", t.toString());
+                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
 
         });
