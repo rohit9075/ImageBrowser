@@ -1,8 +1,28 @@
 package com.example.flickerapp.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PhotoModel {
 
-    private String image,title,author,tags;
+    @SerializedName("media")
+    private String image;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("author")
+    private String author;
+
+    @SerializedName("tags")
+    private String tags;
+
+
+    public PhotoModel(String image, String title, String author, String tags) {
+        this.image = image;
+        this.title = title;
+        this.author = author;
+        this.tags = tags;
+    }
 
     public String getImage(){
         return image;
