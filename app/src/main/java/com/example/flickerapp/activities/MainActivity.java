@@ -1,7 +1,9 @@
-package com.example.flickerapp;
+package com.example.flickerapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.flickerapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
