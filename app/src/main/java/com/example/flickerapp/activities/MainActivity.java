@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity  {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
 
-//        getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoDetailFragment()).commit();
-
 
     }
 
