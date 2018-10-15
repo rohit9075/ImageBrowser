@@ -35,7 +35,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_items, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_items, parent, false);
         return new MyViewHolder(view);
 
     }
@@ -44,13 +44,8 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
 
-//        holder.bind(imageList.get(position),listener);
 
         PhotoModel photo = imageList.get(position);
-
-
-
-
 
 //        GlideApp.with(context)
 //                .load(photo.getImage())

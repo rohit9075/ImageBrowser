@@ -31,16 +31,7 @@ import retrofit2.Response;
  */
 public class ImageListFragment extends Fragment {
 
-
-    // reference variables
-    RecyclerView mRecyclerView;
-
-    List<PhotoModel> mFlickerDataList;
-
-
-    ImageRecyclerAdapter mImageRecyclerAdapter;
-
-
+    RecyclerView  mRecyclerView;
 
 
     public ImageListFragment() {
@@ -55,6 +46,7 @@ public class ImageListFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_image_list, container, false);
 
 
+
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -67,11 +59,14 @@ public class ImageListFragment extends Fragment {
             public void onResponse(Call<ResponseList> call, Response<ResponseList> response) {
 
                 //adding the all data to the ArrayList
-                mFlickerDataList = new ArrayList<>();
+              List<PhotoModel>  mFlickerDataList = new ArrayList<>();
                 mFlickerDataList = (response.body().getItemList());
 
 
-                mImageRecyclerAdapter = new ImageRecyclerAdapter(getContext(), mFlickerDataList);
+             ImageRecyclerAdapter   mImageRecyclerAdapter = new ImageRecyclerAdapter(getContext(), mFlickerDataList);
+
+             mRecyclerView.setAdapter(mImageRecyclerAdapter);
+
 
             }
 
