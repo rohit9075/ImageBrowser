@@ -9,11 +9,12 @@ import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
 
+import com.example.flickerapp.Listner.DataInerface;
 import com.example.flickerapp.R;
 import com.example.flickerapp.fragments.ImageListFragment;
 import com.example.flickerapp.fragments.PhotoDetailFragment;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements DataInerface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,21 @@ public class MainActivity extends AppCompatActivity  {
             //  orientation = Configuration.ORIENTATION_LANDSCAPE;
             // Landscape
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoDetailFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoDetailFragment(),"PhotoDetailFrag").commit();
             //Do something
 
         }
     }
 
 
+    @Override
+    public void sendToFragment(Bundle bundle) {
+
+       FragmentManager manager = getSupportFragmentManager();
+
+       PhotoDetailFragment fragment = (PhotoDetailFragment) manager.findFragmentByTag("PhotoDetailFrag");
+
+       fragment.getDataFromFragment(bundle);
+
+    }
 }

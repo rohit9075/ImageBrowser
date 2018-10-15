@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.flickerapp.Listner.DataInerface;
+import com.example.flickerapp.Listner.RecyclerOnClickListner;
+import com.example.flickerapp.Listner.RecyclerViewTouchListener;
 import com.example.flickerapp.R;
 import com.example.flickerapp.adapter.ImageRecyclerAdapter;
 import com.example.flickerapp.api_client.APIClient;
@@ -33,6 +36,10 @@ public class ImageListFragment extends Fragment {
 
     RecyclerView  mRecyclerView;
 
+    List<PhotoModel>  mFlickerDataList;
+
+    DataInerface dataInerface;
+
 
     public ImageListFragment() {
         // Required empty public constructor
@@ -50,6 +57,8 @@ public class ImageListFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        handlingRecyclerViewItemClick();
+
         ImagelistEndPoint apiService =
                 APIClient.getClient().create(ImagelistEndPoint.class);
 
@@ -59,7 +68,8 @@ public class ImageListFragment extends Fragment {
             public void onResponse(Call<ResponseList> call, Response<ResponseList> response) {
 
                 //adding the all data to the ArrayList
-              List<PhotoModel>  mFlickerDataList = new ArrayList<>();
+
+                mFlickerDataList = new ArrayList<>();
                 mFlickerDataList = (response.body().getItemList());
 
 
@@ -80,6 +90,38 @@ public class ImageListFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    private void handlingRecyclerViewItemClick() {
+        mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), mRecyclerView, new RecyclerOnClickListner() {
+            @Override
+            public void onClick(View view, int position) {
+
+                PhotoModel modelClass = mFlickerDataList.get(position);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("author" , modelClass.getAuthor());
+                bundle.putString("title",modelClass.getTitle());
+                bundle.putString("tags" , modelClass.getTags());
+                bundle.putString("link", modelClass.getMedia().getImageLink());
+
+                sendData(bundle);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+                // handle event in long press
+            }
+        }));
+    }
+
+    private void sendData(Bundle bundle){
+        dataInerface = (DataInerface) getActivity();
+
+        dataInerface.sendToFragment(bundle);
     }
 
 }
