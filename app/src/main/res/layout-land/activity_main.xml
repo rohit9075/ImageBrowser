@@ -25,10 +25,10 @@
         android:background="#8BC34A"
         android:id="@+id/containerforPhotoDetail">
 
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.example.flickerapp.fragments.PhotoDetailFragment"/>
+        <!--<fragment-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:name="com.example.flickerapp.fragments.PhotoDetailFragment"/>-->
 
     </LinearLayout>
 
