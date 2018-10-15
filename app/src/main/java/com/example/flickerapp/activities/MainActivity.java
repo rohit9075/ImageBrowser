@@ -16,6 +16,8 @@ import com.example.flickerapp.fragments.PhotoDetailFragment;
 
 public class MainActivity extends AppCompatActivity implements DataInerface {
 
+    Bundle myBundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +55,15 @@ public class MainActivity extends AppCompatActivity implements DataInerface {
     @Override
     public void sendToFragment(Bundle bundle) {
 
-       FragmentManager manager = getSupportFragmentManager();
+        myBundle = bundle;
 
-       PhotoDetailFragment fragment = (PhotoDetailFragment) manager.findFragmentByTag("PhotoDetailFrag");
+//       FragmentManager manager = getSupportFragmentManager();
 
-       fragment.getDataFromFragment(bundle);
+//       PhotoDetailFragment fragment = (PhotoDetailFragment) manager.findFragmentByTag("PhotoDetailFrag");
+
+        PhotoDetailFragment fragment = new PhotoDetailFragment();
+
+       fragment.getDataFromFragment(myBundle);
 
     }
 }

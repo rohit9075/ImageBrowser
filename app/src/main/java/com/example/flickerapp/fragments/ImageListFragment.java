@@ -3,6 +3,7 @@ package com.example.flickerapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -107,6 +108,10 @@ public class ImageListFragment extends Fragment {
                 bundle.putString("link", modelClass.getMedia().getImageLink());
 
                 sendData(bundle);
+
+                getFragmentManager().beginTransaction().replace(R.id.container,new PhotoDetailFragment());
+
+
 
             }
 

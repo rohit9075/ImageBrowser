@@ -22,6 +22,8 @@ public class PhotoDetailFragment extends Fragment {
     private TextView author,title,tags,link;
     private ImageView image;
 
+    Bundle myBundle;
+
 
     public PhotoDetailFragment() {
         // Required empty public constructor
@@ -41,21 +43,26 @@ public class PhotoDetailFragment extends Fragment {
         link = view.findViewById(R.id.photo_link);
         image = view.findViewById(R.id.photo_image);
 
+
+        author.setText(myBundle.getString("author"));
+        title.setText(myBundle.getString("title"));
+        tags.setText(myBundle.getString("tags"));
+
+        String imagelink = myBundle.getString("link");
+        String link = imagelink.replaceFirst("_m.","_b.");
+
+        GlideApp.with(getContext())
+                .load(link)
+                .thumbnail(Glide.with(getContext()).load(R.drawable.ic_placeholder))
+                .into(image);
+
         return view;
     }
 
     public void getDataFromFragment(Bundle bundle){
 
-        author.setText(bundle.getString("author"));
-        title.setText(bundle.getString("title"));
-        tags.setText(bundle.getString("tags"));
+        myBundle = bundle;
 
-        String imagelink = bundle.getString("link");
-
-        GlideApp.with(getContext())
-                .load(imagelink)
-                .thumbnail(Glide.with(getContext()).load(R.drawable.ic_placeholder))
-                .into(image);
 
     }
 
