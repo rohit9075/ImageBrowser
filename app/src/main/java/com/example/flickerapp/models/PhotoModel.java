@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class PhotoModel {
 
     @SerializedName("media")
-    private String image;
+    private Media media;
 
     @SerializedName("title")
     private String title;
@@ -16,37 +16,35 @@ public class PhotoModel {
     @SerializedName("tags")
     private String tags;
 
-
-    public String getImage(){
-        return image;
+    public Media getMedia() {
+        return media;
     }
 
-    public void setImage(String image){
-        this.image= image;
+    public void setMedia(Media media) {
+        this.media = media;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title){
-        this.title=title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAuthor(){
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author){
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getTags(){
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(String tags){
+    public void setTags(String tags) {
         this.tags = tags;
     }
-
 }

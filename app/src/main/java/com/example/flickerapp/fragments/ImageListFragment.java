@@ -15,12 +15,11 @@ import com.example.flickerapp.R;
 import com.example.flickerapp.adapter.ImageRecyclerAdapter;
 import com.example.flickerapp.api_client.APIClient;
 import com.example.flickerapp.api_client.ImagelistEndPoint;
+import com.example.flickerapp.api_client.ResponseList;
 import com.example.flickerapp.models.PhotoModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,23 +61,22 @@ public class ImageListFragment extends Fragment {
         ImagelistEndPoint apiService =
                 APIClient.getClient().create(ImagelistEndPoint.class);
 
-        Call<PhotoModel> call = apiService.getRepo("car","any","json","1");
-        call.enqueue(new Callback<PhotoModel>() {
+        Call<ResponseList> call = apiService.getRepo("car","any","json","1");
+        call.enqueue(new Callback<ResponseList>() {
             @Override
-            public void onResponse(Call<PhotoModel> call, Response<PhotoModel> response) {
+            public void onResponse(Call<ResponseList> call, Response<ResponseList> response) {
 
                 //adding the all data to the ArrayList
                 mFlickerDataList = new ArrayList<>();
-                mFlickerDataList.addAll(response.body());
-                Toast.makeText(getContext(), mFlickerDataList.size(), Toast.LENGTH_SHORT).show();
+                mFlickerDataList = (response.body().getItemList());
+
 
                 mImageRecyclerAdapter = new ImageRecyclerAdapter(getContext(), mFlickerDataList);
 
-                mImageRecyclerAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<PhotoModel> call, Throwable t) {
+            public void onFailure(Call<ResponseList> call, Throwable t) {
                 // Log error here since request failed
                 Log.e("Repos", t.toString());
                 Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();

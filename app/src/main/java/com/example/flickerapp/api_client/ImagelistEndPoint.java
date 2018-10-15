@@ -1,6 +1,5 @@
 package com.example.flickerapp.api_client;
 
-import com.example.flickerapp.models.PhotoModel;
 
 
 import retrofit2.Call;
@@ -11,10 +10,11 @@ public interface ImagelistEndPoint {
 
 
     @GET("/services/feeds/photos_public.gne")
-    Call<PhotoModel> getRepo(@Query("tags") String name,
-                                   @Query("tagmode") String tagmod,
-                                   @Query("format") String format,
-                                   @Query("nojsoncallback") String callback);
+    Call<ResponseList> getRepo(
+            @Query("tags") String name,
+            @Query("tagmode") String tagmod,
+            @Query("format") String format,
+            @Query("nojsoncallback") String callback);
 
 
 }
