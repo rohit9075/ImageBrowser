@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.flickerapp.R;
+import com.example.flickerapp.activities.GlideApp;
 import com.example.flickerapp.models.PhotoModel;
 
 
@@ -18,8 +20,8 @@ import java.util.List;
 
 public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdapter.MyViewHolder> {
 
-    List<PhotoModel> imageList;
-    Context context;
+    private List<PhotoModel> imageList;
+    private Context context;
 
     //********************** added in the version 2.0 ********************************
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
@@ -47,10 +49,14 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
         PhotoModel photo = imageList.get(position);
 
-//        GlideApp.with(context)
-//                .load(photo.getImage())
-//                .thumbnail(Glide.with(context).load(R.drawable.ic_placeholder))
-//                .into(holder.image);
+        String ImageLink = photo.getMedia().getImageLink();
+
+        String link = ImageLink.replaceFirst("_m.","_b.");
+
+        GlideApp.with(context)
+                .load(link)
+                .thumbnail(Glide.with(context).load(R.drawable.ic_placeholder))
+                .into(holder.image);
 
         holder.title.setText(photo.getTitle());
 
@@ -61,12 +67,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         return imageList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
         private ImageView image;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
