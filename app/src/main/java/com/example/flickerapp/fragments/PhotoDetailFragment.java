@@ -22,9 +22,6 @@ public class PhotoDetailFragment extends Fragment {
     private TextView author,title,tags,link;
     private ImageView image;
 
-    String myAuthor;
-
-
     public PhotoDetailFragment() {
         // Required empty public constructor
     }

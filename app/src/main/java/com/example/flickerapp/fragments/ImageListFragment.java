@@ -133,7 +133,7 @@ public class ImageListFragment extends Fragment {
                     //  orientation = Configuration.ORIENTATION_LANDSCAPE;
                     // Landscape
 //                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment,"PhotoDetailFrag").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment).commit();
                     //Do something
 
                 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:id="@+id/container_main"
     tools:context=".activities.MainActivity">
 
     <LinearLayout
@@ -25,10 +26,6 @@
         android:background="#8BC34A"
         android:id="@+id/containerforPhotoDetail">
 
-        <!--<fragment-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:name="com.example.flickerapp.fragments.PhotoDetailFragment"/>-->
 
     </LinearLayout>
 
