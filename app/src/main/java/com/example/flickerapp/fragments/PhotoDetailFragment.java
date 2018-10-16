@@ -59,12 +59,7 @@ public class PhotoDetailFragment extends Fragment {
                     .load(link)
                     .thumbnail(Glide.with(getContext()).load(R.drawable.ic_placeholder))
                     .into(image);
-
         }
-
-
-
-
 
         return view;
     }
