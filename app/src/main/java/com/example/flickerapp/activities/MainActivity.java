@@ -1,28 +1,24 @@
 package com.example.flickerapp.activities;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
-import android.view.Surface;
-import android.view.WindowManager;
 
-import com.example.flickerapp.Listner.DataInerface;
 import com.example.flickerapp.R;
 import com.example.flickerapp.fragments.ImageListFragment;
 import com.example.flickerapp.fragments.PhotoDetailFragment;
 
-public class MainActivity extends AppCompatActivity implements DataInerface {
+public class MainActivity extends AppCompatActivity {
 
     Bundle myBundle;
+
+    public static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         getScreenOrientation();
 
@@ -51,19 +47,4 @@ public class MainActivity extends AppCompatActivity implements DataInerface {
         }
     }
 
-
-    @Override
-    public void sendToFragment(Bundle bundle) {
-
-        myBundle = bundle;
-
-//       FragmentManager manager = getSupportFragmentManager();
-
-//       PhotoDetailFragment fragment = (PhotoDetailFragment) manager.findFragmentByTag("PhotoDetailFrag");
-
-        PhotoDetailFragment fragment = new PhotoDetailFragment();
-
-       fragment.getDataFromFragment(myBundle);
-
-    }
 }

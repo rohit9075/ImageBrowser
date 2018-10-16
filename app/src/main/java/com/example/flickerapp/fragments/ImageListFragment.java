@@ -1,18 +1,18 @@
 package com.example.flickerapp.fragments;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.flickerapp.Listner.DataInerface;
 import com.example.flickerapp.Listner.RecyclerOnClickListner;
 import com.example.flickerapp.Listner.RecyclerViewTouchListener;
 import com.example.flickerapp.R;
@@ -35,11 +35,12 @@ import retrofit2.Response;
  */
 public class ImageListFragment extends Fragment {
 
+    Bundle bundle;
+
     RecyclerView  mRecyclerView;
 
     List<PhotoModel>  mFlickerDataList;
 
-    DataInerface dataInerface;
 
 
     public ImageListFragment() {
@@ -101,15 +102,37 @@ public class ImageListFragment extends Fragment {
 
                 PhotoModel modelClass = mFlickerDataList.get(position);
 
-                Bundle bundle = new Bundle();
+
+                bundle = new Bundle();
                 bundle.putString("author" , modelClass.getAuthor());
                 bundle.putString("title",modelClass.getTitle());
                 bundle.putString("tags" , modelClass.getTags());
                 bundle.putString("link", modelClass.getMedia().getImageLink());
 
-                sendData(bundle);
+                PhotoDetailFragment fragment = new PhotoDetailFragment();
+                fragment.setArguments(bundle);
 
-                getFragmentManager().beginTransaction().replace(R.id.container,new PhotoDetailFragment());
+
+//                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
+
+
+                Display screenOrientation = getActivity().getWindowManager().getDefaultDisplay();
+//                int orientation = Configuration.ORIENTATION_UNDEFINED;
+
+                if(screenOrientation.getWidth() < screenOrientation.getHeight()){
+                    // orientation = Configuration.ORIENTATION_PORTRAIT;
+
+                    // portrait
+                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
+
+                }else {
+                    //  orientation = Configuration.ORIENTATION_LANDSCAPE;
+                    // Landscape
+//                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
+                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.containerforPhotoDetail,new PhotoDetailFragment(),"PhotoDetailFrag").commit();
+                    //Do something
+
+                }
 
 
 
@@ -123,10 +146,5 @@ public class ImageListFragment extends Fragment {
         }));
     }
 
-    private void sendData(Bundle bundle){
-        dataInerface = (DataInerface) getActivity();
-
-        dataInerface.sendToFragment(bundle);
-    }
 
 }

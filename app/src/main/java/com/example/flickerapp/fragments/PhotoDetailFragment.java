@@ -3,12 +3,12 @@ package com.example.flickerapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.flickerapp.R;
@@ -22,7 +22,7 @@ public class PhotoDetailFragment extends Fragment {
     private TextView author,title,tags,link;
     private ImageView image;
 
-    Bundle myBundle;
+    String myAuthor;
 
 
     public PhotoDetailFragment() {
@@ -44,26 +44,28 @@ public class PhotoDetailFragment extends Fragment {
         image = view.findViewById(R.id.photo_image);
 
 
-        author.setText(myBundle.getString("author"));
-        title.setText(myBundle.getString("title"));
-        tags.setText(myBundle.getString("tags"));
+        Bundle bundle = getArguments();
 
-        String imagelink = myBundle.getString("link");
-        String link = imagelink.replaceFirst("_m.","_b.");
+        if (bundle != null){
 
-        GlideApp.with(getContext())
-                .load(link)
-                .thumbnail(Glide.with(getContext()).load(R.drawable.ic_placeholder))
-                .into(image);
+            author.setText(bundle.getString("author"));
+            title.setText(bundle.getString("title"));
+            tags.setText(bundle.getString("tags"));
+
+            String imagelink = bundle.getString("link");
+            String link = imagelink.replaceFirst("_m.","_b.");
+
+            GlideApp.with(getContext())
+                    .load(link)
+                    .thumbnail(Glide.with(getContext()).load(R.drawable.ic_placeholder))
+                    .into(image);
+
+        }
+
+
+
+
 
         return view;
     }
-
-    public void getDataFromFragment(Bundle bundle){
-
-        myBundle = bundle;
-
-
-    }
-
 }
