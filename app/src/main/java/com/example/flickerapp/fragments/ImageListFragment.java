@@ -1,7 +1,6 @@
 package com.example.flickerapp.fragments;
 
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -109,8 +108,10 @@ public class ImageListFragment extends Fragment {
                 bundle.putString("tags" , modelClass.getTags());
                 bundle.putString("link", modelClass.getMedia().getImageLink());
 
-                PhotoDetailFragment fragment = new PhotoDetailFragment();
+                PhotoZoomFragment fragment = new PhotoZoomFragment();
                 fragment.setArguments(bundle);
+
+
 
 
 //                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
@@ -144,7 +145,43 @@ public class ImageListFragment extends Fragment {
             @Override
             public void onLongClick(View view, int position) {
 
-                // handle event in long press
+                PhotoModel modelClass = mFlickerDataList.get(position);
+
+
+                bundle = new Bundle();
+                bundle.putString("author" , modelClass.getAuthor());
+                bundle.putString("title",modelClass.getTitle());
+                bundle.putString("tags" , modelClass.getTags());
+                bundle.putString("link", modelClass.getMedia().getImageLink());
+
+                PhotoDetailFragment fragment = new PhotoDetailFragment();
+                fragment.setArguments(bundle);
+
+
+//                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
+
+
+                // checking the display orientation
+
+                Display screenOrientation = getActivity().getWindowManager().getDefaultDisplay();
+//                int orientation = Configuration.ORIENTATION_UNDEFINED;
+
+                if(screenOrientation.getWidth() < screenOrientation.getHeight()){
+                    // orientation = Configuration.ORIENTATION_PORTRAIT;
+
+                    // portrait
+                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
+
+                }else {
+                    Toast.makeText(getContext(),     "Click working in else part", Toast.LENGTH_SHORT).show();
+                    //  orientation = Configuration.ORIENTATION_LANDSCAPE;
+                    // Landscape
+//                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment,"PhotoDetailFrag").commit();
+                    //Do something
+
+                }
+
             }
         }));
     }
