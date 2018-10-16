@@ -8,6 +8,7 @@ import android.view.Display;
 import com.example.flickerapp.R;
 import com.example.flickerapp.fragments.ImageListFragment;
 import com.example.flickerapp.fragments.PhotoDetailFragment;
+import com.example.flickerapp.fragments.PhotoPreviewFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             //  orientation = Configuration.ORIENTATION_LANDSCAPE;
             // Landscape
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoDetailFragment(),"PhotoDetailFrag").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoPreviewFragment(),"PhotoDetailFrag").commit();
             //Do something
 
         }

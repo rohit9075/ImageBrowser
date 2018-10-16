@@ -116,6 +116,8 @@ public class ImageListFragment extends Fragment {
 //                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
 
 
+                // checking the display orientation
+
                 Display screenOrientation = getActivity().getWindowManager().getDefaultDisplay();
 //                int orientation = Configuration.ORIENTATION_UNDEFINED;
 
@@ -126,10 +128,11 @@ public class ImageListFragment extends Fragment {
                     getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
 
                 }else {
+                    Toast.makeText(getContext(),     "Click working in else part", Toast.LENGTH_SHORT).show();
                     //  orientation = Configuration.ORIENTATION_LANDSCAPE;
                     // Landscape
 //                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.containerforPhotoDetail,new PhotoDetailFragment(),"PhotoDetailFrag").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment,"PhotoDetailFrag").commit();
                     //Do something
 
                 }
