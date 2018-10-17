@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             //  orientation = Configuration.ORIENTATION_LANDSCAPE;
             // Landscape
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment() , "listFrag").commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoPreviewFragment(),"PhotoDetailFrag").commit();
             //Do something
 

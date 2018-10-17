@@ -1,6 +1,7 @@
 package com.example.flickerapp.fragments;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,8 @@ public class ImageListFragment extends Fragment {
 
     List<PhotoModel>  mFlickerDataList;
 
+    Dialog dialog;
+
 
 
     public ImageListFragment() {
@@ -52,7 +55,6 @@ public class ImageListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_image_list, container, false);
-
 
 
         mRecyclerView = view.findViewById(R.id.recyclerView);
@@ -126,13 +128,12 @@ public class ImageListFragment extends Fragment {
                     // orientation = Configuration.ORIENTATION_PORTRAIT;
 
                     // portrait
-                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
+                    getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment ).commit();
+
 
                 }else {
-                    Toast.makeText(getContext(),     "Click working in else part", Toast.LENGTH_SHORT).show();
-                    //  orientation = Configuration.ORIENTATION_LANDSCAPE;
-                    // Landscape
-//                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
+
+
                     getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment).commit();
                     //Do something
 
@@ -185,6 +186,5 @@ public class ImageListFragment extends Fragment {
             }
         }));
     }
-
 
 }
