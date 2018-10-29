@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.flickerapp.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
