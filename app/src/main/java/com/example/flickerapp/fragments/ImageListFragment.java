@@ -116,32 +116,16 @@ public class ImageListFragment extends Fragment {
 
 
 
-//                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
 
 
-                // checking the display orientation
-
-                Display screenOrientation = getActivity().getWindowManager().getDefaultDisplay();
-//                int orientation = Configuration.ORIENTATION_UNDEFINED;
-
-                if(screenOrientation.getWidth() < screenOrientation.getHeight()){
-                    // orientation = Configuration.ORIENTATION_PORTRAIT;
-
-                    // portrait
                     getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment ).commit();
 
-
-                }else {
-
-
-                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment).commit();
-                    //Do something
 
                 }
 
 
 
-            }
+
 
             @Override
             public void onLongClick(View view, int position) {
@@ -162,26 +146,8 @@ public class ImageListFragment extends Fragment {
 //                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
 
 
-                // checking the display orientation
 
-                Display screenOrientation = getActivity().getWindowManager().getDefaultDisplay();
-//                int orientation = Configuration.ORIENTATION_UNDEFINED;
-
-                if(screenOrientation.getWidth() < screenOrientation.getHeight()){
-                    // orientation = Configuration.ORIENTATION_PORTRAIT;
-
-                    // portrait
                     getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,fragment).commit();
-
-                }else {
-                    Toast.makeText(getContext(),     "Click working in else part", Toast.LENGTH_SHORT).show();
-                    //  orientation = Configuration.ORIENTATION_LANDSCAPE;
-                    // Landscape
-//                    getFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-                    getFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,fragment,"PhotoDetailFrag").commit();
-                    //Do something
-
-                }
 
             }
         }));

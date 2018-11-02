@@ -21,31 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getScreenOrientation();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
     }
 
-
-
-    public void getScreenOrientation()
-    {
-        Display screenOrientation = getWindowManager().getDefaultDisplay();
-        int orientation = Configuration.ORIENTATION_UNDEFINED;
-
-        if(screenOrientation.getWidth() < screenOrientation.getHeight()){
-            // orientation = Configuration.ORIENTATION_PORTRAIT;
-
-            // portrait
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment()).commit();
-
-        }else {
-            //  orientation = Configuration.ORIENTATION_LANDSCAPE;
-            // Landscape
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ImageListFragment() , "listFrag").commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerforPhotoDetail,new PhotoPreviewFragment(),"PhotoDetailFrag").commit();
-            //Do something
-
-        }
-    }
 
 }
